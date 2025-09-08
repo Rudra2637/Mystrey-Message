@@ -9,11 +9,12 @@ import VerificationEmail from "../../../../emails/VerificationEmail";
 export async function POST(request:Request){
     await dbConnect()
     try {
-        const {userName,email,password} = await request.json()
+        const {username,email,password} = await request.json()
         const userExist = await UserModel.findOne({
-            userName,
+            username,
             isVerified:true
         })
+        
         if(userExist){
             return Response.json({
                 success:false,
@@ -42,7 +43,7 @@ export async function POST(request:Request){
             const codeExpiry = new Date()
             codeExpiry.setHours(codeExpiry.getHours() + 1)
             const newUser = await new UserModel({
-                    username:userName,
+                    username:username,
                     email,
                     password:hashPassword,
                     verifyCode,
@@ -54,7 +55,7 @@ export async function POST(request:Request){
             await newUser.save()
         }
         const emailResponse = await sendVerificationEmail(
-            email,userName,verifyCode
+            email,username,verifyCode
         )
         if(!emailResponse.success){
             return Response.json({

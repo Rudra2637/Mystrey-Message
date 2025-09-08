@@ -10,13 +10,14 @@ const UsernameQuerySchema = z.object({
 
 export async function GET(request:Request){
     //The url would be something like this localhost:3000/api/cuu?username=xyz here we need to extract username from the url
-    
+    console.log("GET REQ from check-username-unique hello")
     await dbConnect()
     try {
         const {searchParams} = new URL(request.url)                         //We took the complete url here 
         const queryParam = {
             username:searchParams.get('username')                           //We extracted username from the url
         }
+        
         const result = UsernameQuerySchema.safeParse(queryParam)             //Zod will look into it
         console.log("Result",result)
         if(!result.success){
