@@ -23,13 +23,13 @@ const page = () => {
     })
 
     const onSubmit = async (data:z.infer<typeof verifySchema>) => {
-        
+        isCheckingCode(true)
         try {
             const result = await axios.post(`/api/verify-code`,{
                 username:params.username,
                 code:data.code
             })
-            isCheckingCode(true)
+            
             toast(
                 <div>
                 <strong>{result.data.success ? "Success" : "Error"}</strong>
