@@ -115,6 +115,7 @@ const page = () => {
   }
 
   const {username} = session?.user 
+  //Do Research on how to get hold of the base url
   const baseUrl = `${window.location.protocol}//${window.location.host}`
   const profileUrl = `${baseUrl}/u/${username}`
   const copyToClipboard = () => {
