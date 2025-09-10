@@ -6,6 +6,7 @@ import { signInSchema } from '@/schemas/signInSchema'
 import { zodResolver } from '@hookform/resolvers/zod'
 import axios from 'axios'
 import { signIn } from 'next-auth/react'
+import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
@@ -87,6 +88,14 @@ const page = () => {
           </form>
 
         </Form>
+        <div className="text-center mt-4">
+              <p>
+                Not signed up yet?{' '}
+                <Link href="/sign-up" className="text-blue-600 hover:text-blue-800">
+                  Sign up
+                </Link>
+              </p>
+        </div>
       </div>
     </div>
   )
