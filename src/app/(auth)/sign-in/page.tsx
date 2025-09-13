@@ -13,7 +13,7 @@ import { useForm } from 'react-hook-form'
 import { toast } from 'sonner'
 import * as z from 'zod'
 
-const page = () => {
+const Page = () => {
   const [isChecking,setIsChecking] = useState(false)
   const router = useRouter()
 
@@ -101,4 +101,4 @@ const page = () => {
   )
 }
 
-export default page
+export default Page

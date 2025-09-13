@@ -24,7 +24,7 @@
 //         return {success:false,message:"Failed to send Verification email"}
 //     }
 // }
-const nodemailer = require("nodemailer");
+import nodemailer from "nodemailer"
 // sendVerificationEmail.ts
 import { ApiResponse } from "@/types/apiResponse";
 

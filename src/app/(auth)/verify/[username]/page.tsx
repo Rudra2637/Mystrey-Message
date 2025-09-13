@@ -14,7 +14,7 @@ import { Loader2 } from 'lucide-react'
 import { InputOTP, InputOTPGroup, InputOTPSlot } from '@/components/ui/input-otp'
 import { Button } from '@/components/ui/button'
 
-const page = () => {
+const Page = () => {
     const [codeCheck,isCheckingCode] = useState(false)
     const params = useParams()
     const router = useRouter()
@@ -100,4 +100,4 @@ const page = () => {
     )
 }
 
-export default page
+export default Page
