@@ -7,7 +7,7 @@ export {default} from "next-auth/middleware"              //exporting the defaul
 // This function can be marked `async` if using `await` inside
 
 export const config = {
-  matcher: ['/dashboard/:path*', '/sign-in', '/sign-up', '/', '/verify/:path*'],
+  matcher: ['/dashboard/:path*', '/sign-in', '/sign-up', '/', '/verify/:path*'],    //specifying the paths where the middleware should be applied
 };
 
 export async function middleware(request: NextRequest) {           //middleware function that will run before any request is made to the specified paths
