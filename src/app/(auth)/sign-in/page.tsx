@@ -5,6 +5,7 @@ import { Input } from '@/components/ui/input'
 import { signInSchema } from '@/schemas/signInSchema'
 import { zodResolver } from '@hookform/resolvers/zod'
 import axios from 'axios'
+import { Loader2 } from 'lucide-react'
 import { signIn } from 'next-auth/react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
@@ -25,6 +26,7 @@ const Page = () => {
     }
   })
   const onSubmit = async (data:z.infer<typeof signInSchema>) => {
+    setIsChecking(true)
     const result = await signIn('credentials',{
       redirect:false,
       identifier:data.identifier,
@@ -46,6 +48,7 @@ const Page = () => {
       )
       router.replace('/dashboard')
     }
+    setIsChecking(false)
   }
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-100">
@@ -84,7 +87,17 @@ const Page = () => {
                 </FormItem>
               )}
             />
-            <Button type="submit">Sign In</Button>
+            <Button type="submit" disabled={isChecking}>
+              {
+                isChecking ? (
+                  <>
+                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                    Please Wait
+                  </>
+                ) : ('Sign In')
+                
+              }
+            </Button>
           </form>
 
         </Form>

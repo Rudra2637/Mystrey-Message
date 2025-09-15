@@ -77,7 +77,7 @@ function UserDashboard() {
         const axiosError = error as AxiosError<ApiResponse>;
           toast(
             <div>
-              <div>Error in fetching state</div>
+              <div>No Messages Received</div>
             </div>
           )
       } finally {
