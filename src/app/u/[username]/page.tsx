@@ -52,6 +52,7 @@ const Page = () => {
           <div>{response.data.message}</div>
         </div>
       )
+      form.reset({ content: "" })
     } catch (error) {
       console.error("Error in sending message ", error)
       toast(<div><strong>Error in sending message</strong></div>)
