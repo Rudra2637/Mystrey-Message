@@ -55,7 +55,7 @@ const Page = () => {
       form.reset({ content: "" })
     } catch (error) {
       console.error("Error in sending message ", error)
-      toast(<div><strong>Error in sending message</strong></div>)
+        toast(<div><strong>User is currently not accepting messages</strong></div>)
     } finally {
       setMessageStatus(false)
     }
