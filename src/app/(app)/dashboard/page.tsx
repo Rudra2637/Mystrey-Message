@@ -16,6 +16,7 @@ import { useSession } from 'next-auth/react';
 import React, { useCallback, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { acceptMessageSchema } from '@/schemas/acceptMessageSchema';
+import { toast } from 'sonner';
 
 function UserDashboard() {
   const [messages, setMessages] = useState<Message[]>([]);
@@ -64,19 +65,21 @@ function UserDashboard() {
         const response = await axios.get<ApiResponse>('/api/get-messages');
         setMessages(response.data.messages || []);
         if (refresh) {
-          // toast({
-          //   title: 'Refreshed Messages',
-          //   description: 'Showing latest messages',
-          // });
+          toast(
+            <div>
+              <strong>Refreshed Messages</strong>
+              <div>Showing Latest Messages </div>
+            </div>
+          )
+
         }
       } catch (error) {
         const axiosError = error as AxiosError<ApiResponse>;
-        // toast({
-        //   title: 'Error',
-        //   description:
-        //     axiosError.response?.data.message ?? 'Failed to fetch messages',
-        //   variant: 'destructive',
-        // });
+          toast(
+            <div>
+              <div>Error in fetching state</div>
+            </div>
+          )
       } finally {
         setIsLoading(false);
         setIsSwitchLoading(false);
@@ -101,19 +104,19 @@ function UserDashboard() {
         acceptMessages: !acceptMessages,
       });
       setValue('isAcceptingMessage', !acceptMessages);
-      // toast({
-      //   title: response.data.message,
-      //   variant: 'default',
-      // });
+      toast(
+          <div>
+            <div>{response.data.message}</div>
+          </div>
+        )
+
     } catch (error) {
       const axiosError = error as AxiosError<ApiResponse>;
-      // toast({
-      //   title: 'Error',
-      //   description:
-      //     axiosError.response?.data.message ??
-      //     'Failed to update message settings',
-      //   variant: 'destructive',
-      // });
+      toast(
+          <div>
+            <div>Error in fetching state</div>
+          </div>
+        )
     }
   };
 
@@ -128,10 +131,12 @@ function UserDashboard() {
 
   const copyToClipboard = () => {
     navigator.clipboard.writeText(profileUrl);
-    // toast({
-    //   title: 'URL Copied!',
-    //   description: 'Profile URL has been copied to clipboard.',
-    // });
+     toast(
+        <strong>
+          Link Copied Successfully
+        </strong>
+      )
+
   };
 
   return (
