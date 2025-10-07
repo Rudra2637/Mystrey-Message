@@ -1,33 +1,29 @@
-import { streamText } from 'ai';
-import { google } from '@ai-sdk/google';
+import { streamText } from "ai";
+import { google } from "@ai-sdk/google";
 import { NextResponse } from "next/server";
-
 
 export const runtime = "edge";
 
 export async function POST(req: Request) {
+  
   try {
     const prompt = `
       Generate exactly three open-ended and engaging questions.
       Output only the questions in this strict format:
       Question 1||Question 2||Question 3
-
       Do not include any explanations, introductions, or extra text.
       Make sure each set of questions is unique and suitable for a diverse anonymous audience.
     `;
 
-
     const result = await streamText({
-      model: google("models/gemini-1.5-flash"),
+      model: google("gemini-2.5-flash-lite-preview-09-2025"), // ✅ no "models/" prefix for v1
       prompt,
-      temperature: 0.8, // allow variation
+      temperature: 0.8,
       topP: 0.9,
     });
 
-     const fullOutput = await result.text;
-
-    
-    return NextResponse.json({ completion: fullOutput });
+    const output = await result.text;
+    return NextResponse.json({ completion: output });
   } catch (error) {
     console.error("An unexpected error occurred:", error);
     return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
