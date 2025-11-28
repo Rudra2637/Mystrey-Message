@@ -32,7 +32,6 @@ export const authOptions : NextAuthOptions = {
                         throw new Error("Invalid Credentials")
                     }
                     else return user
-
                 } catch (err:any) {
                     throw new Error(err)
                 }

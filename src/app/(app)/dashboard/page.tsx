@@ -131,7 +131,7 @@ function UserDashboard() {
 
   const copyToClipboard = () => {
     navigator.clipboard.writeText(profileUrl);
-     toast(
+    toast(
         <strong>
           Link Copied Successfully
         </strong>
